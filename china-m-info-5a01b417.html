@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>日常与竞技之间 · MK体育随记</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: #fdfaf5;
+      color: #2c2b28;
+      line-height: 1.75;
+      padding: 0 1.5rem;
+    }
+    .page {
+      max-width: 800px;
+      margin: 3rem auto;
+      background: #fefcf9;
+      padding: 3rem 2.5rem 4rem;
+      border-radius: 24px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.04), 0 1px 4px rgba(0,0,0,0.02);
+    }
+    /* 文章标题区 */
+    .article-title {
+      font-size: 2.2rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      color: #2f2a22;
+      margin-bottom: 0.6rem;
+    }
+    .article-meta {
+      display: flex;
+      gap: 1rem;
+      color: #9a9287;
+      font-size: 0.85rem;
+      border-bottom: 1px solid #ece6dd;
+      padding-bottom: 1.2rem;
+      margin-bottom: 2rem;
+    }
+    .article-meta span {
+      display: inline-block;
+    }
+    .article-meta .label {
+      background: #ece6dd;
+      padding: 0 0.6rem;
+      border-radius: 12px;
+      color: #5f584c;
+      font-size: 0.75rem;
+      font-weight: 500;
+      line-height: 1.8;
+    }
+    /* 导语 */
+    .lead {
+      font-size: 1.15rem;
+      color: #3f3a32;
+      background: #f7f2ea;
+      padding: 1.5rem 1.8rem;
+      border-radius: 20px;
+      margin-bottom: 2rem;
+      border-left: 4px solid #d9cdbd;
+      letter-spacing: 0.01em;
+    }
+    .lead p {
+      margin-bottom: 0.5rem;
+    }
+    .lead p:last-child {
+      margin-bottom: 0;
+    }
+    /* 正文段落 */
+    .body-text p {
+      margin-bottom: 1.6rem;
+      font-size: 1rem;
+      color: #3b3730;
+    }
+    .body-text p:last-child {
+      margin-bottom: 0;
+    }
+    /* 引用提示框 */
+    .highlight-box {
+      background: #f2ebe1;
+      padding: 1.8rem 2rem;
+      border-radius: 24px;
+      margin: 2.5rem 0 2rem;
+      position: relative;
+      box-shadow: inset 0 1px 4px rgba(0,0,0,0.02);
+    }
+    .highlight-box::before {
+      content: "📌";
+      font-size: 1.2rem;
+      margin-right: 0.6rem;
+      opacity: 0.7;
+    }
+    .highlight-box strong {
+      font-weight: 500;
+      color: #4a4135;
+    }
+    .highlight-box a {
+      color: #7a6a54;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+      transition: color 0.2s;
+    }
+    .highlight-box a:hover {
+      color: #b07f5a;
+    }
+    .highlight-box .quote-source {
+      display: block;
+      margin-top: 0.8rem;
+      font-size: 0.85rem;
+      color: #847a6b;
+      font-style: normal;
+    }
+    /* 场景小卡片（内嵌于文章） */
+    .scene-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 2.2rem 0 2rem;
+    }
+    .scene-item {
+      flex: 1 1 160px;
+      background: #f8f4ed;
+      padding: 1rem 1.2rem;
+      border-radius: 20px;
+      border: 1px solid #ece4d9;
+    }
+    .scene-item h4 {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #4f463a;
+      margin-bottom: 0.3rem;
+      letter-spacing: 0.02em;
+    }
+    .scene-item p {
+      font-size: 0.9rem;
+      color: #6b6255;
+      margin-bottom: 0;
+      line-height: 1.5;
+    }
+    /* FAQ 摘要 */
+    .faq-summary {
+      margin: 2.5rem 0 1.8rem;
+      border-top: 1px solid #e8e0d6;
+      padding-top: 2rem;
+    }
+    .faq-item {
+      padding: 0.8rem 0;
+      border-bottom: 1px solid #f0e9e0;
+    }
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+    .faq-q {
+      font-weight: 500;
+      color: #3f382e;
+      margin-bottom: 0.2rem;
+    }
+    .faq-a {
+      font-size: 0.92rem;
+      color: #6b6255;
+    }
+    /* 访问句（自然嵌入） */
+    .visit-sentence {
+      background: #f5efe7;
+      padding: 1.2rem 1.8rem;
+      border-radius: 40px;
+      margin: 2.8rem 0 1rem;
+      font-size: 1rem;
+      text-align: center;
+      color: #3f3a32;
+    }
+    .visit-sentence a {
+      color: #6f5d48;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      font-weight: 500;
+    }
+    .visit-sentence a:hover {
+      color: #997b5e;
+    }
+    /* 响应式 */
+    @media (max-width: 640px) {
+      body {
+        padding: 0 0.8rem;
+      }
+      .page {
+        padding: 1.8rem 1.2rem 3rem;
+        margin: 1.5rem auto;
+        border-radius: 18px;
+      }
+      .article-title {
+        font-size: 1.6rem;
+      }
+      .lead {
+        padding: 1rem 1.2rem;
+        font-size: 1rem;
+      }
+      .highlight-box {
+        padding: 1.2rem 1.4rem;
+      }
+      .scene-grid {
+        flex-direction: column;
+      }
+      .visit-sentence {
+        padding: 1rem 1rem;
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- 文章标题 -->
+    <h1 class="article-title">运动即日常：从街角到屏幕的节奏</h1>
+    <div class="article-meta">
+      <span class="label">随感</span>
+      <span>2025 · 春</span>
+      <span>3 分钟阅读</span>
+    </div>
+
+    <!-- 导语 -->
+    <div class="lead">
+      <p>大概是从某个傍晚的跑步开始，发现运动不只属于赛场。它藏在通勤路上的一小段快走、午休时的拉伸，或者深夜对着屏幕看一场直播的投入里。这里记下一些片段，关于「MK体育」如何成为那个连接点。</p>
+    </div>
+
+    <!-- 正文段落 多段 -->
+    <div class="body-text">
+      <p>上周末收拾房间，翻出一双旧跑鞋。鞋底磨得厉害，但回忆清晰——那阵子每晚都沿着河滨跑四公里，耳机里放着节奏感很强的音乐，偶尔停下来看看微信运动排名。那时候还没养成看体育资讯的习惯，直到朋友推荐，才开始留意更系统的运动内容。后来慢慢发现，一个靠谱的体育平台就像一面镜子，既反映赛事，也映照我们自己的动力。</p>
+
+      <p>现在很多人聊「运动生活」，并不是要成为运动员，而是想给日常添一点韧性。比如我认识的一个编辑，每天都用午休时间看十分钟的赛事集锦，她说那是她的「精神咖啡」；还有一位退休教师，晚上会跟着线上课程做操，再打开体育新闻看看当天的战报。这些画面让我想到，体育的周边其实非常广阔，它不只有输赢，还有陪伴和节奏感。</p>
+
+      <p>说到节奏，最近发现一个有趣的现象：身边越来越多的人把体育内容当作背景音或阅读素材。做饭时听一场解说，通勤时刷几条战术分析，周末约朋友看一场录播。这种「轻参与」反而让体育离生活更近。我也慢慢习惯在某个固定的网页里看看当日的推荐——没有推送轰炸，只是安静地陈列着。</p>
+    </div>
+
+    <!-- 引用提示框（带链接） -->
+    <div class="highlight-box">
+      想起一个朋友说过：“真正的好平台，是让你感觉不到‘看’的动作，而是直接进入了状态。” 这种感觉在浏览 <a href="https://china-m-mksports.com">MK体育</a> 时尤为明显——没有多余的装饰，信息自然展开，像和一个懂行的朋友聊了近况。
+      <span class="quote-source">—— 摘自媒体笔记 · 2025.03</span>
+    </div>
+
+    <!-- 特点 + 场景 小卡片 (内嵌于文章) -->
+    <div class="scene-grid">
+      <div class="scene-item">
+        <h4>🏃 晨间灵感</h4>
+        <p>早起翻翻头条，用一两分钟扫一眼赛果，给清晨加一点竞技的提神。</p>
+      </div>
+      <div class="scene-item">
+        <h4>📱 碎片补给</h4>
+        <p>等车、排队时点开一个专题，节奏刚好，不占精力却充实。</p>
+      </div>
+      <div class="scene-item">
+        <h4>📖 晚间回放</h4>
+        <p>不看直播也来得及，文字回顾加上关键动图，像读一篇短篇小说。</p>
+      </div>
+    </div>
+
+    <!-- 继续正文 -->
+    <div class="body-text">
+      <p>有人担心体育资讯会变得越来越喧哗，但我觉得好的平台恰恰懂得「安静」的价值。不用弹窗提醒你回来，不用夸张的标题催促你点击，只是把内容放在那里，你来或者不来，它都在更新。这种克制，反而让人愿意主动走近。</p>
+    </div>
+
+    <!-- FAQ 摘要 (简版) -->
+    <div class="faq-summary">
+      <div class="faq-item">
+        <div class="faq-q">❓ 内容更新频率如何？</div>
+        <div class="faq-a">保持日常更新，覆盖主要赛事和专题，不搞信息轰炸。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">❓ 适合只看不参与讨论的人吗？</div>
+        <div class="faq-a">完全适合，页面以阅读为主，没有强制社交互动。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">❓ 移动端体验怎么样？</div>
+        <div class="faq-a">适配做得不错，手机浏览器直接打开即可，不一定要下 app。</div>
+      </div>
+    </div>
+
+    <!-- 访问句（自然嵌入） -->
+    <div class="visit-sentence">
+      🌿 如果你也想找这样一个不吵不闹、又保持内容活力的地方，可以试试 <a href="https://china-m-mksports.com">MK体育</a>，当作日常阅读的一个站点。
+    </div>
+
+    <!-- 结尾小字 -->
+    <div style="margin-top: 2.5rem; font-size: 0.8rem; color: #b8afa2; text-align: center; border-top: 1px solid #f0eae2; padding-top: 1.8rem;">
+      记录于一个普通的周末 · 无推广意图 仅个人分享
+    </div>
+  </div>
+</body>
+</html>
